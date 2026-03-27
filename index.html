@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadsy — Agentes IA para cualquier negocio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #FAFAF7;
+      --warm-white: #FFFFFF;
+      --mint: #D4F5E9;
+      --sky: #D6EDFF;
+      --lavender: #EAE2FF;
+      --peach: #FFE9D9;
+      --yellow: #FFF3C4;
+      --sage: #A8D5BA;
+      --teal: #3BBFA4;
+      --blue: #3B8BFF;
+      --purple: #7B5CF5;
+      --coral: #FF6B6B;
+      --dark: #111827;
+      --mid: #374151;
+      --light: #6B7280;
+      --border: #E5E7EB;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(250, 250, 247, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--dark);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal);
+    }
+
+    .nav-cta {
+      background: var(--dark);
+      color: #fff;
+      padding: .55rem 1.4rem;
+      border-radius: 50px;
+      font-size: .88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--teal);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* animated bg blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .45;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .blob-1 {
+      width: 450px;
+      height: 450px;
+      background: var(--mint);
+      top: -80px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .blob-2 {
+      width: 350px;
+      height: 350px;
+      background: var(--lavender);
+      top: 50px;
+      right: -80px;
+      animation-delay: -3s;
+    }
+
+    .blob-3 {
+      width: 300px;
+      height: 300px;
+      background: var(--sky);
+      bottom: 0;
+      left: 30%;
+      animation-delay: -5s;
+    }
+
+    .blob-4 {
+      width: 200px;
+      height: 200px;
+      background: var(--peach);
+      bottom: 80px;
+      right: 15%;
+      animation-delay: -2s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-30px) scale(1.05);
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--mint);
+      color: #1a6b4a;
+      border-radius: 50px;
+      padding: .4rem 1rem;
+      font-size: .8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+      animation: slideDown .7s ease both;
+    }
+
+    .hero-badge::before {
+      content: '✦';
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+      animation: slideUp .8s ease .2s both;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .hero h1 mark {
+      background: var(--yellow);
+      color: var(--dark);
+      padding: 0 .3em;
+      border-radius: 6px;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--light);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 1;
+      animation: slideUp .8s ease .4s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      animation: slideUp .8s ease .6s both;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+      padding: .85rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(59, 191, 164, .35);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(59, 191, 164, .45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      padding: .85rem 2rem;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--teal);
+      background: var(--mint);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1s ease 1s both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .stat-label {
+      font-size: .85rem;
+      color: var(--light);
+    }
+
+    /* ── FLOATING CARDS ── */
+    .floating-cards {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      overflow: visible;
+    }
+
+    .float-card {
+      position: absolute;
+      background: #fff;
+      border-radius: 16px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .08);
+      font-size: .82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      animation: floatCard 6s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    .float-card .icon {
+      font-size: 1.3rem;
+    }
+
+    .float-card-1 {
+      top: 20px;
+      left: 0;
+      animation-delay: 0s;
+      background: var(--mint);
+    }
+
+    .float-card-2 {
+      top: 80px;
+      right: 30px;
+      animation-delay: -2s;
+      background: var(--lavender);
+    }
+
+    .float-card-3 {
+      bottom: 30px;
+      left: 60px;
+      animation-delay: -4s;
+      background: var(--peach);
+    }
+
+    .float-card-4 {
+      bottom: 60px;
+      right: 0;
+      animation-delay: -1s;
+      background: var(--sky);
+    }
+
+    @keyframes floatCard {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: .8rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+
+    .section-sub {
+      color: var(--light);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 540px;
+      margin-top: .8rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .feat-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: transform .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feat-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, var(--mint) 100%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .feat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, .1);
+    }
+
+    .feat-card:hover::before {
+      opacity: 1;
+    }
+
+    .feat-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feat-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: .5rem;
+    }
+
+    .feat-desc {
+      color: var(--light);
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    /* ── CHANNELS ── */
+    .channels-section {
+      background: var(--dark);
+      color: #fff;
+      border-radius: 32px;
+      margin: 0 1rem;
+    }
+
+    .channels-section .section-label {
+      color: var(--sage);
+    }
+
+    .channels-section .section-title,
+    .channels-section .section-sub {
+      color: #fff;
+    }
+
+    .channels-section .section-sub {
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .channels-grid {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+
+    .channel-pill {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 50px;
+      padding: .7rem 1.4rem;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: background .2s, transform .2s;
+      animation: floatCard 5s ease-in-out infinite;
+    }
+
+    .channel-pill:hover {
+      background: rgba(255, 255, 255, .15);
+      transform: translateY(-3px);
+    }
+
+    .channel-pill:nth-child(2) {
+      animation-delay: -1s;
+    }
+
+    .channel-pill:nth-child(3) {
+      animation-delay: -2s;
+    }
+
+    .channel-pill:nth-child(4) {
+      animation-delay: -3s;
+    }
+
+    .channel-pill:nth-child(5) {
+      animation-delay: -4s;
+    }
+
+    .channel-pill:nth-child(6) {
+      animation-delay: -.5s;
+    }
+
+    /* ── INDUSTRIES ── */
+    .industries-scroll {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+    }
+
+    .industries-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .industry-card {
+      flex: 0 0 200px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform .3s, box-shadow .3s;
+      cursor: default;
+    }
+
+    .industry-card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .1);
+    }
+
+    .industry-icon {
+      font-size: 2.5rem;
+      margin-bottom: .8rem;
+      display: block;
+    }
+
+    .industry-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .industry-count {
+      font-size: .78rem;
+      color: var(--light);
+      margin-top: .3rem;
+    }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      background: linear-gradient(135deg, #f0fdf8 0%, #f5f0ff 100%);
+      border-radius: 32px;
+      margin: 0 1rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .plan-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 2.5rem;
+      border: 2px solid var(--border);
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plan-card.popular {
+      border-color: var(--teal);
+      box-shadow: 0 8px 40px rgba(59, 191, 164, .2);
+    }
+
+    .plan-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 56px rgba(0, 0, 0, .12);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--teal);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border-radius: 50px;
+    }
+
+    .plan-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    .plan-desc {
+      font-size: .85rem;
+      color: var(--light);
+      margin-top: .3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-price {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 3.2rem;
+      letter-spacing: -2px;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .plan-price span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--light);
+      letter-spacing: 0;
+    }
+
+    .plan-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+
+    .plan-meta {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: .88rem;
+    }
+
+    .plan-meta-key {
+      color: var(--light);
+    }
+
+    .plan-meta-val {
+      font-weight: 600;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 2rem;
+    }
+
+    .plan-features li {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: .35rem .85rem;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--mid);
+    }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      padding: .85rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: .95rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .plan-btn-outline {
+      border: 2px solid var(--border);
+      color: var(--dark);
+    }
+
+    .plan-btn-outline:hover {
+      border-color: var(--teal);
+      background: var(--mint);
+    }
+
+    .plan-btn-filled {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(59, 191, 164, .3);
+    }
+
+    .plan-btn-filled:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(59, 191, 164, .4);
+    }
+
+    /* ── ORBITING ANIMATION ── */
+    .orbit-section {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      padding: 6rem 2rem;
+    }
+
+    .orbit-center {
+      position: relative;
+      z-index: 5;
+      background: var(--dark);
+      color: #fff;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 0 0 20px rgba(59, 191, 164, .1), 0 0 0 40px rgba(59, 191, 164, .05);
+    }
+
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(59, 191, 164, .3);
+      animation: spin linear infinite;
+    }
+
+    .orbit-ring-1 {
+      width: 220px;
+      height: 220px;
+      animation-duration: 8s;
+    }
+
+    .orbit-ring-2 {
+      width: 340px;
+      height: 340px;
+      animation-duration: 14s;
+      animation-direction: reverse;
+    }
+
+    .orbit-ring-3 {
+      width: 460px;
+      height: 460px;
+      animation-duration: 20s;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .orbit-planet {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+      animation: spin linear infinite;
+    }
+
+    /* counter-rotate so icons stay upright */
+    .orbit-planet span {
+      animation: spin linear infinite reverse;
+      display: block;
+    }
+
+    .op-1 {
+      background: var(--mint);
+      top: -24px;
+      left: 50%;
+      margin-left: -24px;
+      animation-duration: 8s;
+    }
+
+    .op-1 span {
+      animation-duration: 8s;
+    }
+
+    .op-2 {
+      background: var(--lavender);
+      bottom: -24px;
+      left: 50%;
+      margin-left: -24px;
+      animation-duration: 8s;
+    }
+
+    .op-2 span {
+      animation-duration: 8s;
+    }
+
+    .op-3 {
+      background: var(--peach);
+      top: 50%;
+      left: -24px;
+      margin-top: -24px;
+      animation-duration: 14s;
+    }
+
+    .op-3 span {
+      animation-duration: 14s;
+    }
+
+    .op-4 {
+      background: var(--sky);
+      top: 50%;
+      right: -24px;
+      margin-top: -24px;
+      animation-duration: 14s;
+    }
+
+    .op-4 span {
+      animation-duration: 14s;
+    }
+
+    .op-5 {
+      background: var(--yellow);
+      top: -24px;
+      left: 50%;
+      margin-left: -24px;
+      animation-duration: 20s;
+    }
+
+    .op-5 span {
+      animation-duration: 20s;
+    }
+
+    .op-6 {
+      background: var(--mint);
+      right: -24px;
+      top: 50%;
+      margin-top: -24px;
+      animation-duration: 20s;
+    }
+
+    .op-6 span {
+      animation-duration: 20s;
+    }
+
+    .op-7 {
+      background: var(--lavender);
+      bottom: -24px;
+      left: 50%;
+      margin-left: -24px;
+      animation-duration: 20s;
+    }
+
+    .op-7 span {
+      animation-duration: 20s;
+    }
+
+    .orbit-ring-1 {
+      animation-duration: 8s;
+    }
+
+    .orbit-ring-2 {
+      animation-duration: 14s;
+    }
+
+    .orbit-ring-3 {
+      animation-duration: 20s;
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.3rem 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark);
+      text-align: left;
+    }
+
+    .faq-q .chevron {
+      transition: transform .3s;
+      font-size: 1.2rem;
+      color: var(--light);
+    }
+
+    .faq-item.open .faq-q .chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      transition: max-height .4s ease, padding .3s;
+      color: var(--light);
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 1.5rem 1.3rem;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      background: var(--dark);
+      color: #fff;
+      border-radius: 32px;
+      margin: 0 1rem 4rem;
+      text-align: center;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(59, 191, 164, .25) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(123, 92, 245, .2) 0%, transparent 60%);
+    }
+
+    .cta-section .section-title {
+      color: #fff;
+      position: relative;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, .65);
+      max-width: 480px;
+      margin: 1rem auto 2.5rem;
+      position: relative;
+    }
+
+    .cta-section .btn-primary {
+      position: relative;
+      font-size: 1.1rem;
+      padding: 1rem 2.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .footer-brand span {
+      color: var(--teal);
+    }
+
+    footer p {
+      font-size: .82rem;
+      color: var(--light);
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 6rem 1.2rem 3rem;
+      }
+
+      .channels-section,
+      .pricing-section,
+      .cta-section {
+        margin: 0 .5rem;
+        border-radius: 20px;
+      }
+
+      .orbit-ring-3 {
+        width: 320px;
+        height: 320px;
+      }
+
+      .orbit-ring-2 {
+        width: 230px;
+        height: 230px;
+      }
+
+      .orbit-ring-1 {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Leadsy<span></span></a>
+    <ul class="nav-links">
+      <li><a href="#features">Plataforma</a></li>
+      <li><a href="#industries">Industrias</a></li>
+      <li><a href="#pricing">Precios</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="#pricing">Ver planes →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+
+    <div class="hero-badge">Más de 1,000 empresas confían en Leadsy</div>
+
+    <h1>Agentes IA para<br><em>cualquier negocio.</em><br><mark>Una plataforma</mark> que<br>cualquier agencia puede
+      vender.</h1>
+
+    <p class="hero-sub">Despliega agentes IA multicanal — voz, chat, WhatsApp y SMS. Potencia tus operaciones o genera
+      ingresos recurrentes vendiendo inteligencia artificial con tu propia marca.</p>
+
+    <div class="hero-buttons">
+      <a class="btn-primary" href="#pricing">Ver planes y precios</a>
+      <a class="btn-outline" href="#features">Cómo funciona →</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1,000+</div>
+        <div class="stat-label">Empresas activas</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">620+</div>
+        <div class="stat-label">Reseñas en G2</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Sin código</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORBITING INTEGRATIONS -->
+  <div class="container" style="text-align:center; padding: 2rem 1rem 0;">
+    <div class="section-label">Ecosistema</div>
+    <h2 class="section-title">Conectado a todo lo que ya usas</h2>
+  </div>
+  <div class="orbit-section">
+    <div class="orbit-ring orbit-ring-1">
+      <div class="orbit-planet op-1"><span>💬</span></div>
+      <div class="orbit-planet op-2"><span>📞</span></div>
+    </div>
+    <div class="orbit-ring orbit-ring-2">
+      <div class="orbit-planet op-3"><span>🛒</span></div>
+      <div class="orbit-planet op-4"><span>📊</span></div>
+    </div>
+    <div class="orbit-ring orbit-ring-3">
+      <div class="orbit-planet op-5"><span>🏥</span></div>
+      <div class="orbit-planet op-6"><span>🏠</span></div>
+      <div class="orbit-planet op-7"><span>⚖️</span></div>
+    </div>
+    <div class="orbit-center">🤖</div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <div class="section-label">Plataforma</div>
+      <h2 class="section-title">Todo lo que necesitas para<br>vender IA como SaaS</h2>
+      <p class="section-sub">Deja de vender automatizaciones complicadas. Con Leadsy, vendes tu propia plataforma de
+        agentes IA bajo tu marca.</p>
+
+      <div class="features-grid">
+        <div class="feat-card">
+          <div class="feat-icon">🏷️</div>
+          <div class="feat-title">Marca Blanca Completa</div>
+          <div class="feat-desc">Tu logo. Tu dominio. Tu facturación. Tus precios. Deja de enviar clientes a
+            herramientas de terceros y aprópiate de tu SaaS.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">👥</div>
+          <div class="feat-title">Multi-cliente Ilimitado</div>
+          <div class="feat-desc">Clientes ilimitados con subcuentas aisladas. Escala como una empresa de SaaS, no como
+            un freelancer haciendo malabares.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">⚡</div>
+          <div class="feat-title">Plantillas Listas para Vender</div>
+          <div class="feat-desc">Agentes verticales de IA prediseñados para cualquier sector. Elige, agrega la info de
+            tu cliente, despliega y cobra.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">💰</div>
+          <div class="feat-title">Facturación Integrada</div>
+          <div class="feat-desc">No más hackeos de Stripe. Crea planes, niveles de uso y suscripciones: fija tu precio y
+            quédate con las ganancias.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🔌</div>
+          <div class="feat-title">Importa lo que ya creaste</div>
+          <div class="feat-desc">¿Tienes flujos en Zapier, Make o n8n? Conéctalos a Leadsy y conviértelos en productos
+            SaaS que puedas vender una y otra vez.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🌐</div>
+          <div class="feat-title">Despliega en Cualquier Canal</div>
+          <div class="feat-desc">WhatsApp, Instagram, sitios web, CRM. Ofrece agentes IA donde ya residen los procesos
+            de tus clientes.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHANNELS -->
+  <section id="channels" style="padding: 2rem;">
+    <div class="channels-section">
+      <div class="container" style="padding: 4rem 2rem;">
+        <div class="section-label">Canales</div>
+        <h2 class="section-title">Multicanal de verdad</h2>
+        <p class="section-sub">Tus agentes IA trabajan exactamente donde tus clientes ya están, 24/7 sin descanso.</p>
+        <div class="channels-grid">
+          <div class="channel-pill">💬 Chat Web</div>
+          <div class="channel-pill">📱 WhatsApp</div>
+          <div class="channel-pill">📞 Voz IA</div>
+          <div class="channel-pill">📲 SMS</div>
+          <div class="channel-pill">📸 Instagram</div>
+          <div class="channel-pill">📘 Facebook</div>
+          <div class="channel-pill">🛍️ Shopify</div>
+          <div class="channel-pill">📊 CRM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section id="industries">
+    <div class="container">
+      <div class="section-label">Industrias</div>
+      <h2 class="section-title">Agentes listos para vender<br>en cualquier sector</h2>
+      <p class="section-sub">No son chatbots genéricos — son empleados digitales verticales listos para operar en
+        cualquier empresa.</p>
+
+      <div class="industries-scroll">
+        <div class="industry-card">
+          <span class="industry-icon">🏥</span>
+          <div class="industry-name">Salud</div>
+          <div class="industry-count">3 agentes</div>
+        </div>
+        <div class="industry-card">
+          <span class="industry-icon">🛒</span>
+          <div class="industry-name">E-commerce</div>
+          <div class="industry-count">3 agentes</div>
+        </div>
+        <div class="industry-card">
+          <span class="industry-icon">⚖️</span>
+          <div class="industry-name">Legal</div>
+          <div class="industry-count">3 agentes</div>
+        </div>
+        <div class="industry-card">
+          <span class="industry-icon">🛡️</span>
+          <div class="industry-name">Seguros</div>
+          <div class="industry-count">3 agentes</div>
+        </div>
+        <div class="industry-card">
+          <span class="industry-icon">🚗</span>
+          <div class="industry-name">Automotriz</div>
+          <div class="industry-count">3 agentes</div>
+        </div>
+        <div class="industry-card">
+          <span class="industry-icon">🏠</span>
+          <div class="industry-name">Bienes Raíces</div>
+          <div class="industry-count">3 agentes</div>
+        </div>
+        <div class="industry-card">
+          <span class="industry-icon">🏨</span>
+          <div class="industry-name">Hoteles</div>
+          <div class="industry-count">3 agentes</div>
+        </div>
+        <div class="industry-card">
+          <span class="industry-icon">🤖</span>
+          <div class="industry-name">Agencia IA</div>
+          <div class="industry-count">Marca blanca</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" style="padding: 2rem;">
+    <div class="pricing-section">
+      <div class="container" style="padding: 4rem 2rem;">
+        <div class="section-label">Precios</div>
+        <h2 class="section-title">Planes simples y transparentes</h2>
+        <p class="section-sub">Todos los planes incluyen 14 días de prueba gratuita. Sin tarjeta de crédito.</p>
+
+        <div class="pricing-grid">
+
+          <!-- STARTER -->
+          <div class="plan-card">
+            <div class="plan-name">Starter</div>
+            <div class="plan-desc">Perfecto para pequeños equipos que comienzan</div>
+            <div class="plan-price">$97<span>/mes</span></div>
+            <hr class="plan-divider">
+            <div class="plan-meta">
+              <div class="plan-meta-row"><span class="plan-meta-key">Período de prueba</span><span
+                  class="plan-meta-val">14 días</span></div>
+              <div class="plan-meta-row"><span class="plan-meta-key">Agentes incluidos</span><span
+                  class="plan-meta-val">1</span></div>
+            </div>
+            <ul class="plan-features">
+              <li>1 agente de IA incluido</li>
+              <li>Automatizaciones básicas</li>
+              <li>Captura de leads</li>
+              <li>Analítica básica</li>
+              <li>Soporte por email</li>
+            </ul>
+            <a href="" class="plan-btn plan-btn-outline" target="_blank">Comenzar
+              →</a>
+          </div>
+
+          <!-- GROWTH -->
+          <div class="plan-card popular">
+            <div class="popular-badge">Más popular</div>
+            <div class="plan-name">Growth</div>
+            <div class="plan-desc">Ideal para equipos que buscan escalar</div>
+            <div class="plan-price">$150<span>/mes</span></div>
+            <hr class="plan-divider">
+            <div class="plan-meta">
+              <div class="plan-meta-row"><span class="plan-meta-key">Período de prueba</span><span
+                  class="plan-meta-val">14 días</span></div>
+              <div class="plan-meta-row"><span class="plan-meta-key">Agentes incluidos</span><span
+                  class="plan-meta-val">2</span></div>
+            </div>
+            <ul class="plan-features">
+              <li>2 agentes de IA incluidos</li>
+              <li>Automatizaciones avanzadas</li>
+              <li>Captura de leads</li>
+              <li>Analítica de rendimiento</li>
+              <li>Integración con chat web</li>
+              <li>Soporte email</li>
+              <li>Soporte WhatsApp</li>
+            </ul>
+            <a href="" class="plan-btn plan-btn-filled" target="_blank">Comenzar
+              →</a>
+          </div>
+
+          <!-- PRO -->
+          <div class="plan-card">
+            <div class="plan-name">Pro</div>
+            <div class="plan-desc">Ideal para equipos que necesitan máximo poder</div>
+            <div class="plan-price">$300<span>/mes</span></div>
+            <hr class="plan-divider">
+            <div class="plan-meta">
+              <div class="plan-meta-row"><span class="plan-meta-key">Período de prueba</span><span
+                  class="plan-meta-val">14 días</span></div>
+              <div class="plan-meta-row"><span class="plan-meta-key">Agentes incluidos</span><span
+                  class="plan-meta-val">4</span></div>
+            </div>
+            <ul class="plan-features">
+              <li>4 agentes de IA incluidos</li>
+              <li>Automatizaciones avanzadas</li>
+              <li>Captura de leads</li>
+              <li>Analítica avanzada</li>
+              <li>Integración con chat web</li>
+              <li>Soporte prioritario</li>
+              <li>1 asesor de soporte interno</li>
+            </ul>
+            <a href="" class="plan-btn plan-btn-outline" target="_blank">Comenzar
+              →</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container" style="max-width: 720px;">
+      <div class="section-label">Preguntas</div>
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Qué es una plataforma de agentes IA de marca blanca?
+            <span class="chevron">▾</span>
+          </button>
+          <div class="faq-a">Una plataforma de agentes IA de marca blanca te permite montar tu propio SaaS de IA. En
+            lugar de revender herramientas como N8N o Zapier, tienes una plataforma donde todos los agentes llevan tu
+            logo, tu dominio, tus planes y tus reglas. Con Leadsy puedes lanzar tu propio producto, expandirte con
+            control
+            multi-cliente y monetizar como una empresa de SaaS.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿En qué se diferencia Leadsy de Zapier, Make o n8n?
+            <span class="chevron">▾</span>
+          </button>
+          <div class="faq-a">Zapier, Make y n8n son herramientas de flujos de trabajo, ideales para automatizaciones
+            pero no para gestionar un negocio SaaS. No tienen cuentas multi-inquilino, marca blanca propia, ni gestión
+            de suscripciones integrada. Leadsy convierte esas automatizaciones en productos SaaS que puedes vender con
+            ingresos recurrentes.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Puedo usar Leadsy sin conocimientos de programación?
+            <span class="chevron">▾</span>
+          </button>
+          <div class="faq-a">Sí. Leadsy es 100% sin código. Puedes crear empleados IA con solo instrucciones,
+            personalizar la marca y los precios, desplegar en WhatsApp, Instagram, Facebook y CRMs, y supervisar el uso
+            desde un único panel de control, todo sin necesitar un equipo técnico.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Cómo puedo ganar dinero con Leadsy?
+            <span class="chevron">▾</span>
+          </button>
+          <div class="faq-a">Vendes como cualquier SaaS, a través de suscripciones mensuales recurrentes. Un restaurante
+            te paga mensualmente por un asistente de ventas en WhatsApp, una clínica por un agendador de citas, una
+            inmobiliaria por un coordinador de operaciones. Tú pones los precios y Leadsy automatiza toda la facturación
+            en segundo plano.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section style="padding: 2rem;">
+    <div class="cta-section">
+      <div class="section-label" style="color: var(--sage);">Empieza hoy</div>
+      <h2 class="section-title">Tu agencia de IA,<br>totalmente marca blanca</h2>
+      <p>Únete a más de 1,000 empresas que ya generan ingresos recurrentes vendiendo agentes IA con su propia marca.</p>
+      <a class="btn-primary" href="" target="_blank">Comenzar →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Leadsy<span></span></div>
+    <p style="font-size:.8rem; color:var(--light);">© 2026 Leadsy. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feat-card, .plan-card, .industry-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity .6s ease, transform .6s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+
+</html>
