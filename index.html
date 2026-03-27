@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leadsy — Agentes IA para cualquier negocio</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
     *,
@@ -18,22 +17,28 @@
     }
 
     :root {
-      --cream: #FAFAF7;
+      --cream: #e8eae6;
       --warm-white: #FFFFFF;
-      --mint: #D4F5E9;
-      --sky: #D6EDFF;
-      --lavender: #EAE2FF;
-      --peach: #FFE9D9;
-      --yellow: #FFF3C4;
-      --sage: #A8D5BA;
-      --teal: #3BBFA4;
+
+      --mint: #66c1c6;
+      --sky: #d6edff;
+      --lavender: #eae2ff;
+      --peach: #ffe9d9;
+      --yellow: #fff3c4;
+
+      --sage: #66c1c6;
+      --teal: #008080;
+      /* COLOR PRINCIPAL */
       --blue: #3B8BFF;
       --purple: #7B5CF5;
       --coral: #FF6B6B;
-      --dark: #111827;
-      --mid: #374151;
-      --light: #6B7280;
-      --border: #E5E7EB;
+
+      --dark: #2d3436;
+      /* TEXTO PRINCIPAL */
+      --mid: #4a4a4a;
+      --light: #7a7a7a;
+
+      --border: #e0e0e0;
     }
 
     html {
@@ -41,7 +46,7 @@
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: var(--cream);
       color: var(--dark);
       overflow-x: hidden;
@@ -57,23 +62,30 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem 3rem;
+      padding: 1rem 5rem;
       background: rgba(250, 250, 247, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      height: 100px;
+      /* altura fija */
     }
 
     .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Pipeline', sans-serif;
+      /* lo dejamos listo */
+      font-weight: 600;
       font-size: 1.4rem;
       color: var(--dark);
       text-decoration: none;
-      letter-spacing: -0.5px;
     }
 
-    .nav-logo span {
-      color: var(--teal);
+    .nav-logo img {
+      height: 150px;
+      width: auto;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -110,6 +122,13 @@
       transform: translateY(-1px);
     }
 
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      /* espacio entre logo y menú */
+    }
+
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
@@ -118,7 +137,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 4rem;
+      padding: 9rem 2rem 4rem;
       position: relative;
       overflow: hidden;
     }
@@ -201,7 +220,7 @@
     }
 
     .hero h1 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-size: clamp(2.5rem, 6vw, 5rem);
       font-weight: 800;
       line-height: 1.1;
@@ -218,7 +237,7 @@
     }
 
     .hero h1 mark {
-      background: var(--yellow);
+      background: var(--lavender);
       color: var(--dark);
       padding: 0 .3em;
       border-radius: 6px;
@@ -390,7 +409,7 @@
     }
 
     .section-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-weight: 800;
       font-size: clamp(2rem, 4vw, 3rem);
       letter-spacing: -1px;
@@ -628,7 +647,7 @@
     }
 
     .plan-name {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-weight: 800;
       font-size: 1.3rem;
     }
@@ -1108,13 +1127,19 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">Leadsy<span></span></a>
-    <ul class="nav-links">
-      <li><a href="#features">Plataforma</a></li>
-      <li><a href="#industries">Industrias</a></li>
-      <li><a href="#pricing">Precios</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
+    <div class="nav-left">
+      <a class="nav-logo" href="#">
+        <img src="imagenes/logo.png" alt="Leadsy logo">
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features">Plataforma</a></li>
+        <li><a href="#industries">Industrias</a></li>
+        <li><a href="#pricing">Precios</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+
     <a class="nav-cta" href="#pricing">Ver planes →</a>
   </nav>
 
@@ -1450,8 +1475,9 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-brand">Leadsy<span></span></div>
-    <p style="font-size:.8rem; color:var(--light);">© 2026 Leadsy. Todos los derechos reservados.</p>
+    <a class="nav-logo" href="#">
+      <img src="imagenes/logo.png" alt="Leadsy logo">
+      <p style="font-size:.8rem; color:var(--light);">© 2026 Leadsy. Todos los derechos reservados.</p>
   </footer>
 
   <script>
