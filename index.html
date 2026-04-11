@@ -110,12 +110,13 @@
     .nav-cta {
       background: var(--dark);
       color: #fff;
-      padding: .55rem 1.4rem;
-      border-radius: 50px;
-      font-size: .88rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 100px;
       font-weight: 600;
       text-decoration: none;
-      transition: transform .2s, background .2s;
+      font-size: 0.95rem;
+      transition: all .3s ease;
+      white-space: nowrap;
     }
 
     .nav-cta:hover {
@@ -267,15 +268,16 @@
     }
 
     .btn-primary {
-      background: var(--teal);
-      color: #fff;
-      padding: .85rem 2rem;
-      border-radius: 50px;
+      display: inline-block;
+      background: var(--sage);
+      color: #fff !important;
+      padding: 1rem 2.5rem;
+      border-radius: 100px;
       font-weight: 700;
-      font-size: 1rem;
       text-decoration: none;
-      box-shadow: 0 8px 24px rgba(59, 191, 164, .35);
-      transition: transform .2s, box-shadow .2s;
+      transition: all .3s ease;
+      box-shadow: 0 10px 20px rgba(74, 124, 89, 0.2);
+      white-space: nowrap;
     }
 
     .btn-primary:hover {
@@ -1098,7 +1100,12 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav {
-        padding: 1rem 1.2rem;
+        padding: 0.8rem 1.2rem;
+        height: 70px;
+      }
+
+      .nav-logo img {
+        height: 45px;
       }
 
       .nav-links {
@@ -1106,7 +1113,20 @@
       }
 
       .hero {
-        padding: 6rem 1.2rem 3rem;
+        padding: 5rem 1.2rem 2rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        letter-spacing: -1px;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+
+      .float-card {
+        display: none;
       }
 
       .channels-section,
@@ -1116,19 +1136,39 @@
         border-radius: 20px;
       }
 
+      .orbit-section {
+        transform: scale(0.85);
+        margin: -2rem 0;
+      }
+
       .orbit-ring-3 {
-        width: 320px;
-        height: 320px;
+        width: 300px;
+        height: 300px;
       }
 
       .orbit-ring-2 {
-        width: 230px;
-        height: 230px;
+        width: 210px;
+        height: 210px;
       }
 
       .orbit-ring-1 {
-        width: 150px;
-        height: 150px;
+        width: 130px;
+        height: 130px;
+      }
+
+      #demo-msgs {
+        height: 400px !important;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+        padding-top: 2rem;
+      }
+
+      footer p {
+        order: 2;
       }
     }
   </style>
